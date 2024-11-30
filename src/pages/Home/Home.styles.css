@@ -1,3 +1,4 @@
+
 /* Home page layout */
 .home-container {
     display: flex;
@@ -80,26 +81,44 @@
     font-size: 1.2rem;
   }
   
+  
   /* Responsiveness for smaller screens */
   @media (max-width: 768px) {
-    .sidebar {
-        width: 20%;
-        background-color: #f4f4f4;
-        padding: 20px;
-        position: relative;
-        transition: width 0.3s ease;
-      }
-
-    /* .home-container {
-      flex-direction: column;
+    .home-container {
+      flex-direction: column; /* Stack sidebar and main content vertically */
     }
-
+  
+    .sidebar {
+      width: 100%; /* Full width on small screens */
+      height: auto;
+      position: relative;
+      padding: 10px;
+      transition: width 0.3s ease;
+    }
+  
     .main-content {
-      margin-left: 0;
+      width: 100%; /* Take up full width */
+      padding: 15px;
     }
   
     .search-bar input {
+      width: 100%; /* Take full width on small screens */
+    }
+  
+    .weather-table {
       width: 100%;
-    } */
+      overflow-x: auto; /* Enable horizontal scrolling if table is too wide */
+      display: block;
+    }
+  
+    .table-container {
+      overflow-x: auto; /* Ensure the table can scroll horizontally */
+      width: 100%;
+    }
+  
+    .weather-table th,
+    .weather-table td {
+      min-width: 100px; /* Ensure minimum width for readability */
+    }
   }
   

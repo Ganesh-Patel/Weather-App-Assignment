@@ -24,6 +24,9 @@ const Home = () => {
       )
       .filter((index) => index !== null);
     setHighlightedRows(matchingRows);
+    setTimeout(() => {
+      setHighlightedRows([]);
+    }, 3000);
   };
 
   const notifyCityDeletion = (city) => {
@@ -62,56 +65,58 @@ const Home = () => {
           <FaSearch className="search-icon" onClick={handleSearch} />
         </div>
 
-        <table className="weather-table">
-          <thead>
-            <tr>
-              <th>City</th>
-              <th>Description</th>
-              <th>Temperature (°C)</th>
-              <th>Pressure</th>
-              <th>Data Age (hrs)</th>
-              <th>
-                <FaRegTrashAlt className="delete-icon" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {weatherData.length > 0 ? (
-              weatherData.map((data, index) => (
-                <tr
-                  key={index}
-                  className={highlightedRows.includes(index) ? "highlight" : ""}
-                >
-                  <td>{data.city}</td>
-                  <td>
-                    <input
-                      type="text"
-                      value={data.description}
-                      onChange={(e) => {
-                        const newData = [...weatherData];
-                        newData[index].description = e.target.value;
-                        setWeatherData(newData);
-                      }}
-                    />
-                  </td>
-                  <td>{data.temp_in_celsius}</td>
-                  <td>{data.pressure_in_hPa}</td>
-                  <td>{calculateDataAge(data.date_and_time)}</td>
-                  <td>
-                    <FaRegTrashAlt
-                      className="delete-icon"
-                      onClick={() => handleDelete(index)}
-                    />
-                  </td>
-                </tr>
-              ))
-            ) : (
+        <div className="table-container">
+          <table className="weather-table">
+            <thead>
               <tr>
-                <td colSpan="6">No weather data available</td>
+                <th>City</th>
+                <th>Description</th>
+                <th>Temperature (°C)</th>
+                <th>Pressure</th>
+                <th>Data Age (hrs)</th>
+                <th>
+                  <FaRegTrashAlt className="delete-icon" />
+                </th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {weatherData.length > 0 ? (
+                weatherData.map((data, index) => (
+                  <tr
+                    key={index}
+                    className={highlightedRows.includes(index) ? "highlight" : ""}
+                  >
+                    <td>{data.city}</td>
+                    <td>
+                      <input
+                        type="text"
+                        value={data.description}
+                        onChange={(e) => {
+                          const newData = [...weatherData];
+                          newData[index].description = e.target.value;
+                          setWeatherData(newData);
+                        }}
+                      />
+                    </td>
+                    <td>{data.temp_in_celsius}</td>
+                    <td>{data.pressure_in_hPa}</td>
+                    <td>{calculateDataAge(data.date_and_time)}</td>
+                    <td>
+                      <FaRegTrashAlt
+                        className="delete-icon"
+                        onClick={() => handleDelete(index)}
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6">No weather data available</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
